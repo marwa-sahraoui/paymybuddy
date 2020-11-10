@@ -1,0 +1,13 @@
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "firstName": "Nebrass",
+  "lastName": "Lamouchi",
+  "email": "lnibrass@gmail.com",
+  "password": "Nebrass@2020",
+  "enabled": true,
+  "role": "ROLE_ADMIN"
+}
+
+###
