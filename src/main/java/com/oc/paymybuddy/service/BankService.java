@@ -9,8 +9,7 @@ import java.math.BigDecimal;
 
 public class BankService {
 
-    // Demande du montant pour le compte de l'application
-    // l'argent sera versée pour PayMyBuddy depuis la carte bancaire du client
+    //methode externe par défaut vraie pour demander à la banque si la carte credit fonctionnel et le montant existe déjà
     public boolean requestMoney(CreditCard creditCard, BigDecimal amount) {
         return true;
     }

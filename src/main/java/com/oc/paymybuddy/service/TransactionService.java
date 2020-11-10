@@ -66,7 +66,8 @@ public class TransactionService {
         }
     }
 
-    // methode de transfert d'argent d'utilisateur vers son compte bancaire
+    /* methode de transfert d'argent d'utilisateur vers son compte bancaire
+    c'est à dire on fait appel à la methode retirerArgent*/
 
     public boolean tranfertduComptAppliAuCompteBancaire
     (CreditCard creditCard, BigDecimal amount) {
@@ -81,6 +82,10 @@ public class TransactionService {
 
     }
 
+    /*methode send appelé  dans le restcontroller simplification des paramétres par rapport
+    à la 2 eme methode send en tenant compte de securité
+    le principal c'est lui qui connecte a travers son email dans l authentification
+     */
     public boolean send(Principal currentUser, Long receiverId, BigDecimal amountSended) {
         // Principal.getName retourne un email - car on a defini email comme
         // dans la configuration de l'authentication
@@ -95,9 +100,10 @@ public class TransactionService {
     /*
     methode booleenne pour verifier la possibilté d'effectuer le transfert
     d'abord on verifie si le compte sender existe ou pas
-    on vérifie que le prix envoyé <au prix existant dans le comte du sender
+    on vérifie que le prix envoyé > au prix existant dans le compte du sender
     on verifie  si le compte receiver existe ou pas
-    on fait appel au countService la methode de deduction et celle d ajout du montant
+    on fait appel au accountService pour la methode retirerArgent et ajouterArgent
+    puis on enregistre la transaction
      */
     public boolean send(User sender, User receiver, BigDecimal amountSended) {
 
@@ -135,6 +141,5 @@ public class TransactionService {
         }
         throw new IllegalStateException("Solde insuffisant");
     }
-// toutes les methodes sont privées
 
 }

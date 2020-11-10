@@ -24,8 +24,9 @@ class UserServiceItegrationTest {
 
         User userSaved = userService.create(userCreated);
 
+        //on ajoute un utilisateur jason on verifie qu'on obtient un nombre d'utilisateur = nombre initial +1
         assertEquals(nombreUsersInitial + 1, userService.findAll().size());
-        assertTrue(userSaved.getId() != null);
+        assertTrue(userSaved.getId() != null); //on vérifie que son id n'est pas null
 
         // nettoyer la base
         userService.delete(userSaved);

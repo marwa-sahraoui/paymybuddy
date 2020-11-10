@@ -58,7 +58,7 @@ class AccountServiceTest {
 
         assertThat(accounts.size()).isEqualTo(2);
 
-        //
+
         long nombreDeComptesAvecUnSoldeSuperieurA100 = accounts.stream()
                 .filter(account -> account.getAmount().compareTo(BigDecimal.valueOf(100)) > 0)
                 .count();
@@ -106,10 +106,10 @@ class AccountServiceTest {
         accountService.retirerArgent(accounts.get(0), BigDecimal.valueOf(180L));
 
         Account account = accountService.findById(1L);
-
+        //si on retire 180 du compte1 ayant à la base 200 on va avoir 20 restant
         assertThat(account.getAmount()).isEqualTo(BigDecimal.valueOf(20));
     }
-//
+
     @Test
     void ajouterArgent() {
         when(accountRepository.getOne(anyLong()))
@@ -135,7 +135,7 @@ class AccountServiceTest {
         accountService.ajouterArgent(accounts.get(0), BigDecimal.valueOf(180L));
 
         Account account = accountService.findById(1L);
-
+        // si on ajoute 180 au compte1 ayant 200 à la base on aura 380
         assertThat(account.getAmount()).isEqualTo(BigDecimal.valueOf(380));
     }
 

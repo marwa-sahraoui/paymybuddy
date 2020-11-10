@@ -105,12 +105,19 @@ class TransactionServiceTest {
         boolean sent = transactionService.send(users.get(0), users.get(1), BigDecimal.valueOf(100));
 
         assertTrue(sent);
-
-        assertEquals(0, comptes.get(0).getAmount().compareTo(BigDecimal.valueOf(99.5)));//
-        assertEquals(0, comptes.get(1).getAmount().compareTo(BigDecimal.valueOf(600)));//commnt
+        /*
+       user1 possédant 200 si il va transférer 100 donc on va déduire 100.5 , il lui reste alors 99.5
+       user2 posssédant 500 il reçoit 100 donc il aura 600 dans son compte
+         */
+        assertEquals(0, comptes.get(0).getAmount().compareTo(BigDecimal.valueOf(99.5)));
+        assertEquals(0, comptes.get(1).getAmount().compareTo(BigDecimal.valueOf(600)));
     }
 
     @Test
+    /*ce test permet de vérifier le calcul * 1.005
+    expected 0 c'est la différence entre ce qui est valeur estimée de la méthode calculateAmountWithTax
+    et la valeur proprement calculée
+    */
     void calculateAmountWithTax() {
         BigDecimal amountWithTax = transactionService.calculateAmountWithTax(BigDecimal.valueOf(100));
         assertEquals(0, BigDecimal.valueOf(100.5).compareTo(amountWithTax));
@@ -138,7 +145,7 @@ class TransactionServiceTest {
         boolean done = transactionService.rechargeCompte(creditCard.getId(), BigDecimal.valueOf(300), user);
 
         assertTrue(done);
-
+        //compte ayant 200 au départ si on ajoute 300 on aura dans le compte 500
         assertEquals(BigDecimal.valueOf(500), compte.getAmount());
     }
 
@@ -154,7 +161,7 @@ class TransactionServiceTest {
 
         when(bankService.requestMoney(any(), any())).then(x -> true);
 
-
+        //compte ayant 200 au départ si on déduit 100 il rest 100
         boolean done = transactionService.tranfertduComptAppliAuCompteBancaire(creditCard, BigDecimal.valueOf(100));
 
         assertTrue(done);

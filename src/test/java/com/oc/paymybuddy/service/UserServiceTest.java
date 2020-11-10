@@ -48,11 +48,11 @@ class UserServiceTest {
        User james = new User();
 
         when(userRepository.findByEmail(anyString())).thenAnswer(parameters -> james);
-
+        //jason.getContact().size ().isEqualTo(0)
         User jason = new User("Jason", "Bourne", "jason@gmail.com", "superPassword", new ArrayList<>());
-
+        //on va ajouter james à partir de son email mocké à la liste de contact de jason
         userService.addContact(jason, "james@gmail.com");
-
+        //on vérifie que le size de contact de jason devient 1
         assertThat(jason.getContacts().size()).isEqualTo(1);
     }
 

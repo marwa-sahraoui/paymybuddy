@@ -24,12 +24,12 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-    //methode qui retourne un compte à travers l'email de l
+    //methode qui retourne un compte à travers l'email de l'owner qui posséde le compte
     public Account findAccountByEmail(String email) {
         return accountRepository.findByOwner_Email(email);
     }
 
-    //methode permet de deducter un montant du compte sender
+    //methode permet de deduire un montant du compte sender
     public void retirerArgent(Account account, BigDecimal amount) {
         account.setAmount(account.getAmount().subtract(amount));
 
@@ -43,6 +43,7 @@ public class AccountService {
         accountRepository.save(account);
     }
 
+    //methode qui retourne un compte à partir de son id
     public Account findById(Long id) {
         return accountRepository.getOne(id);
     }
